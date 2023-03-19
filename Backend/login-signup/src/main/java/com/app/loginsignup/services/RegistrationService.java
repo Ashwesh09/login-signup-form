@@ -5,6 +5,8 @@ import com.app.loginsignup.repositories.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RegistrationService {
     @Autowired
@@ -19,5 +21,17 @@ public class RegistrationService {
 
     public User findByEmailIDAndPassword(String email, String password){
         return registrationRepository.findByEmailIDAndPassword(email,password);
+    }
+
+    public User getUserData(Integer id){
+        return registrationRepository.findById(id).get();
+    }
+
+    public void deleteUser(Integer id){
+        registrationRepository.delete(getUserData(id));
+    }
+
+    public List<User> getAllUserFromDb(){
+        return registrationRepository.findAll();
     }
 }
